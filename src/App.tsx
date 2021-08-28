@@ -1,10 +1,14 @@
-import "./App.css";
+import { AmplifyAuthenticator, AmplifySignOut } from "@aws-amplify/ui-react";
+import Aplify from "aws-amplify";
+import awsConfig from "./aws-exports";
+
+Aplify.configure(awsConfig);
 
 function App() {
   return (
-    <div className="App">
-      <h1>Hello Sandro</h1>
-    </div>
+    <AmplifyAuthenticator>
+      <AmplifySignOut />
+    </AmplifyAuthenticator>
   );
 }
 
