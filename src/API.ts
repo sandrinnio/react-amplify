@@ -6,11 +6,15 @@ export type CreateListInput = {
   id?: string | null,
   title: string,
   description?: string | null,
+  imageKey?: string | null,
+  slug: string,
 };
 
 export type ModelListConditionInput = {
   title?: ModelStringInput | null,
   description?: ModelStringInput | null,
+  imageKey?: ModelStringInput | null,
+  slug?: ModelStringInput | null,
   and?: Array< ModelListConditionInput | null > | null,
   or?: Array< ModelListConditionInput | null > | null,
   not?: ModelListConditionInput | null,
@@ -61,6 +65,8 @@ export type List = {
   id: string,
   title: string,
   description?: string | null,
+  imageKey?: string | null,
+  slug: string,
   listItems?: ModelListItemConnection | null,
   createdAt: string,
   updatedAt: string,
@@ -103,6 +109,8 @@ export type UpdateListInput = {
   id: string,
   title?: string | null,
   description?: string | null,
+  imageKey?: string | null,
+  slug?: string | null,
 };
 
 export type DeleteListInput = {
@@ -184,6 +192,8 @@ export type ModelListFilterInput = {
   id?: ModelIDInput | null,
   title?: ModelStringInput | null,
   description?: ModelStringInput | null,
+  imageKey?: ModelStringInput | null,
+  slug?: ModelStringInput | null,
   and?: Array< ModelListFilterInput | null > | null,
   or?: Array< ModelListFilterInput | null > | null,
   not?: ModelListFilterInput | null,
@@ -229,6 +239,78 @@ export type ModelActionFilterInput = {
   not?: ModelActionFilterInput | null,
 };
 
+export type SearchableListFilterInput = {
+  id?: SearchableIDFilterInput | null,
+  title?: SearchableStringFilterInput | null,
+  description?: SearchableStringFilterInput | null,
+  imageKey?: SearchableStringFilterInput | null,
+  slug?: SearchableStringFilterInput | null,
+  and?: Array< SearchableListFilterInput | null > | null,
+  or?: Array< SearchableListFilterInput | null > | null,
+  not?: SearchableListFilterInput | null,
+};
+
+export type SearchableIDFilterInput = {
+  ne?: string | null,
+  gt?: string | null,
+  lt?: string | null,
+  gte?: string | null,
+  lte?: string | null,
+  eq?: string | null,
+  match?: string | null,
+  matchPhrase?: string | null,
+  matchPhrasePrefix?: string | null,
+  multiMatch?: string | null,
+  exists?: boolean | null,
+  wildcard?: string | null,
+  regexp?: string | null,
+  range?: Array< string | null > | null,
+};
+
+export type SearchableStringFilterInput = {
+  ne?: string | null,
+  gt?: string | null,
+  lt?: string | null,
+  gte?: string | null,
+  lte?: string | null,
+  eq?: string | null,
+  match?: string | null,
+  matchPhrase?: string | null,
+  matchPhrasePrefix?: string | null,
+  multiMatch?: string | null,
+  exists?: boolean | null,
+  wildcard?: string | null,
+  regexp?: string | null,
+  range?: Array< string | null > | null,
+};
+
+export type SearchableListSortInput = {
+  field?: SearchableListSortableFields | null,
+  direction?: SearchableSortDirection | null,
+};
+
+export enum SearchableListSortableFields {
+  id = "id",
+  title = "title",
+  description = "description",
+  imageKey = "imageKey",
+  slug = "slug",
+}
+
+
+export enum SearchableSortDirection {
+  asc = "asc",
+  desc = "desc",
+}
+
+
+export type SearchableListConnection = {
+  __typename: "SearchableListConnection",
+  items?:  Array<List | null > | null,
+  nextToken?: string | null,
+  total?: number | null,
+};
+
 export type CreateListMutationVariables = {
   input: CreateListInput,
   condition?: ModelListConditionInput | null,
@@ -240,6 +322,8 @@ export type CreateListMutation = {
     id: string,
     title: string,
     description?: string | null,
+    imageKey?: string | null,
+    slug: string,
     listItems?:  {
       __typename: "ModelListItemConnection",
       items?:  Array< {
@@ -269,6 +353,8 @@ export type UpdateListMutation = {
     id: string,
     title: string,
     description?: string | null,
+    imageKey?: string | null,
+    slug: string,
     listItems?:  {
       __typename: "ModelListItemConnection",
       items?:  Array< {
@@ -298,6 +384,8 @@ export type DeleteListMutation = {
     id: string,
     title: string,
     description?: string | null,
+    imageKey?: string | null,
+    slug: string,
     listItems?:  {
       __typename: "ModelListItemConnection",
       items?:  Array< {
@@ -333,6 +421,8 @@ export type CreateListItemMutation = {
       id: string,
       title: string,
       description?: string | null,
+      imageKey?: string | null,
+      slug: string,
       listItems?:  {
         __typename: "ModelListItemConnection",
         nextToken?: string | null,
@@ -373,6 +463,8 @@ export type UpdateListItemMutation = {
       id: string,
       title: string,
       description?: string | null,
+      imageKey?: string | null,
+      slug: string,
       listItems?:  {
         __typename: "ModelListItemConnection",
         nextToken?: string | null,
@@ -413,6 +505,8 @@ export type DeleteListItemMutation = {
       id: string,
       title: string,
       description?: string | null,
+      imageKey?: string | null,
+      slug: string,
       listItems?:  {
         __typename: "ModelListItemConnection",
         nextToken?: string | null,
@@ -457,6 +551,8 @@ export type CreateActionMutation = {
         id: string,
         title: string,
         description?: string | null,
+        imageKey?: string | null,
+        slug: string,
         createdAt: string,
         updatedAt: string,
       } | null,
@@ -493,6 +589,8 @@ export type UpdateActionMutation = {
         id: string,
         title: string,
         description?: string | null,
+        imageKey?: string | null,
+        slug: string,
         createdAt: string,
         updatedAt: string,
       } | null,
@@ -529,6 +627,8 @@ export type DeleteActionMutation = {
         id: string,
         title: string,
         description?: string | null,
+        imageKey?: string | null,
+        slug: string,
         createdAt: string,
         updatedAt: string,
       } | null,
@@ -554,6 +654,8 @@ export type GetListQuery = {
     id: string,
     title: string,
     description?: string | null,
+    imageKey?: string | null,
+    slug: string,
     listItems?:  {
       __typename: "ModelListItemConnection",
       items?:  Array< {
@@ -586,6 +688,8 @@ export type ListListsQuery = {
       id: string,
       title: string,
       description?: string | null,
+      imageKey?: string | null,
+      slug: string,
       listItems?:  {
         __typename: "ModelListItemConnection",
         nextToken?: string | null,
@@ -613,6 +717,8 @@ export type GetListItemQuery = {
       id: string,
       title: string,
       description?: string | null,
+      imageKey?: string | null,
+      slug: string,
       listItems?:  {
         __typename: "ModelListItemConnection",
         nextToken?: string | null,
@@ -656,6 +762,8 @@ export type ListListItemsQuery = {
         id: string,
         title: string,
         description?: string | null,
+        imageKey?: string | null,
+        slug: string,
         createdAt: string,
         updatedAt: string,
       } | null,
@@ -690,6 +798,8 @@ export type GetActionQuery = {
         id: string,
         title: string,
         description?: string | null,
+        imageKey?: string | null,
+        slug: string,
         createdAt: string,
         updatedAt: string,
       } | null,
@@ -734,12 +844,44 @@ export type ListActionsQuery = {
   } | null,
 };
 
+export type SearchListsQueryVariables = {
+  filter?: SearchableListFilterInput | null,
+  sort?: SearchableListSortInput | null,
+  limit?: number | null,
+  nextToken?: string | null,
+  from?: number | null,
+};
+
+export type SearchListsQuery = {
+  searchLists?:  {
+    __typename: "SearchableListConnection",
+    items?:  Array< {
+      __typename: "List",
+      id: string,
+      title: string,
+      description?: string | null,
+      imageKey?: string | null,
+      slug: string,
+      listItems?:  {
+        __typename: "ModelListItemConnection",
+        nextToken?: string | null,
+      } | null,
+      createdAt: string,
+      updatedAt: string,
+    } | null > | null,
+    nextToken?: string | null,
+    total?: number | null,
+  } | null,
+};
+
 export type OnCreateListSubscription = {
   onCreateList?:  {
     __typename: "List",
     id: string,
     title: string,
     description?: string | null,
+    imageKey?: string | null,
+    slug: string,
     listItems?:  {
       __typename: "ModelListItemConnection",
       items?:  Array< {
@@ -764,6 +906,8 @@ export type OnUpdateListSubscription = {
     id: string,
     title: string,
     description?: string | null,
+    imageKey?: string | null,
+    slug: string,
     listItems?:  {
       __typename: "ModelListItemConnection",
       items?:  Array< {
@@ -788,6 +932,8 @@ export type OnDeleteListSubscription = {
     id: string,
     title: string,
     description?: string | null,
+    imageKey?: string | null,
+    slug: string,
     listItems?:  {
       __typename: "ModelListItemConnection",
       items?:  Array< {
@@ -818,6 +964,8 @@ export type OnCreateListItemSubscription = {
       id: string,
       title: string,
       description?: string | null,
+      imageKey?: string | null,
+      slug: string,
       listItems?:  {
         __typename: "ModelListItemConnection",
         nextToken?: string | null,
@@ -853,6 +1001,8 @@ export type OnUpdateListItemSubscription = {
       id: string,
       title: string,
       description?: string | null,
+      imageKey?: string | null,
+      slug: string,
       listItems?:  {
         __typename: "ModelListItemConnection",
         nextToken?: string | null,
@@ -888,6 +1038,8 @@ export type OnDeleteListItemSubscription = {
       id: string,
       title: string,
       description?: string | null,
+      imageKey?: string | null,
+      slug: string,
       listItems?:  {
         __typename: "ModelListItemConnection",
         nextToken?: string | null,
@@ -927,6 +1079,8 @@ export type OnCreateActionSubscription = {
         id: string,
         title: string,
         description?: string | null,
+        imageKey?: string | null,
+        slug: string,
         createdAt: string,
         updatedAt: string,
       } | null,
@@ -958,6 +1112,8 @@ export type OnUpdateActionSubscription = {
         id: string,
         title: string,
         description?: string | null,
+        imageKey?: string | null,
+        slug: string,
         createdAt: string,
         updatedAt: string,
       } | null,
@@ -989,6 +1145,8 @@ export type OnDeleteActionSubscription = {
         id: string,
         title: string,
         description?: string | null,
+        imageKey?: string | null,
+        slug: string,
         createdAt: string,
         updatedAt: string,
       } | null,

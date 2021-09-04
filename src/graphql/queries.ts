@@ -8,6 +8,8 @@ export const getList = /* GraphQL */ `
       id
       title
       description
+      imageKey
+      slug
       listItems {
         items {
           id
@@ -35,6 +37,8 @@ export const listLists = /* GraphQL */ `
         id
         title
         description
+        imageKey
+        slug
         listItems {
           nextToken
         }
@@ -56,6 +60,8 @@ export const getListItem = /* GraphQL */ `
         id
         title
         description
+        imageKey
+        slug
         listItems {
           nextToken
         }
@@ -92,6 +98,8 @@ export const listListItems = /* GraphQL */ `
           id
           title
           description
+          imageKey
+          slug
           createdAt
           updatedAt
         }
@@ -119,6 +127,8 @@ export const getAction = /* GraphQL */ `
           id
           title
           description
+          imageKey
+          slug
           createdAt
           updatedAt
         }
@@ -155,6 +165,38 @@ export const listActions = /* GraphQL */ `
         updatedAt
       }
       nextToken
+    }
+  }
+`;
+export const searchLists = /* GraphQL */ `
+  query SearchLists(
+    $filter: SearchableListFilterInput
+    $sort: SearchableListSortInput
+    $limit: Int
+    $nextToken: String
+    $from: Int
+  ) {
+    searchLists(
+      filter: $filter
+      sort: $sort
+      limit: $limit
+      nextToken: $nextToken
+      from: $from
+    ) {
+      items {
+        id
+        title
+        description
+        imageKey
+        slug
+        listItems {
+          nextToken
+        }
+        createdAt
+        updatedAt
+      }
+      nextToken
+      total
     }
   }
 `;
